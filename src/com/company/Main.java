@@ -105,8 +105,13 @@ public class Main {
         boolean registeredUser = false;
         try {
             Scanner myReader = new Scanner(logins);
-            while (myReader.hasNextLine()||!registeredUser) {
-                String data = myReader.nextLine();
+            while (!registeredUser) {
+                String data = "";
+                try{
+                    data = myReader.nextLine();
+                }catch(Exception e){
+                    return registeredUser;
+                }
                 if(data.equals(userData)){
                     registeredUser = true;
                 }
@@ -117,6 +122,7 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        System.out.println("a");
         return registeredUser;
     }
 
@@ -126,7 +132,7 @@ public class Main {
         String getPassword = getInput("Please enter your password: ");
         String userData =  getUsername + "," + getPassword;
         System.out.println(userData);
-        WriteToFile(userData);
+        WriteToFile("\n"+userData);
     }
 
     public static void WriteToFile(String userData) {
